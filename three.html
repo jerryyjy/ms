@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>three</title>
+	<meta name="name" content="content">
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<style type="text/css" media="screen">
+		/* 浮动布局 浮动布局是有局限性的，浮动元素是脱离文档流，要做清除浮动，这个处理不好的话，会带来很多问题，比如高度塌陷等。 
+		浮动布局的优点就是比较简单，兼容性也比较好。只要清除浮动做的好，是没有什么问题的*/
+		div{
+			min-height: 100px;
+		}
+		.left{
+			float: left;
+			width: 300px;
+			background: red;
+		}
+		.center{
+			background: yellow;
+		}
+		.right{
+			float: right;
+			width: 300px;
+			background: pink ;
+		}
+		/* 绝对定位布局绝对定位布局优点，很快捷，设置很方便，而且也不容易出问题，你可以很快的就能想出这种布局方式。 
+		缺点就是，绝对定位是脱离文档流的，意味着下面的所有子元素也会脱离文档流，这就导致了这种方法的有效性和可使用性是比较差的。 */
+		.container2 div{
+			position: absolute;
+		}
+		.left2{
+			left: 0;
+			width: 300px;
+			background: green;
+		}
+		.right2{
+			right: 0;
+			width: 300px;
+			background: pink;
+		}
+		.center2{
+			left: 300px;
+			right: 300px;
+			background: red;
+		}
+		/* flex布局 felxbox布局是css3里新出的一个，它就是为了解决上述两种方式的不足出现的，是比较完美的一个。目前移动端的布局也都是用flexbox。 
+		felxbox的缺点就是不能兼容IE8及以下浏览器*/
+		.container3{
+			display: flex;
+		}
+		.left3{
+			width: 300px;
+			background: red;
+		}
+		.center3{
+			flex: 1;
+			background: black;
+		}
+		.right3{
+			width: 300px;
+			background: yellow;
+		}
+		/* 表格布局 在flex布局不兼容的时候，可以尝试表格布局。 
+		表格布局也是有缺陷的，当其中一个单元格高度超出的时候，两侧的单元格也是会跟着一起变高的，而有时候这种效果不是我们想要的。*/
+		.container4{
+			width: 100%;
+			height: 100px;
+			display: table;
+		}
+		.container4 div{
+			display: table-cell;
+		}
+		.left4{
+			width: 300px;
+			background: black;
+		}
+		.center4{
+			background: red;
+		}
+		.right4{
+			width: 300px;
+			background: pink;
+		}
+		/* 网格布局 */
+		.container5{
+			width: 100%;
+			display: grid;
+			grid-template-rows: 100px;
+          	grid-template-columns: 300px auto 300px;
+		}
+		.left5{
+			width: 300px;
+			background: red;
+		}
+		.center5{
+			background: yellow;
+		}
+		.right5{
+			width: 300px;
+			background: black;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="left">left</div>
+		<div class="right">right</div>
+		<div class="center">
+			三栏布局
+		</div>
+	</div>
+	<div class="container2">
+		<div class="left2">left</div>
+		
+		<div class="center2">
+			三栏布局
+		</div>
+		<div class="right2">right</div>
+	</div>
+	<div class="container3">
+		<div class="left3">left</div>
+		
+		<div class="center3">
+			三栏布局
+		</div>
+		<div class="right3">right</div>
+	</div>
+	<div class="container4">
+		<div class="left4">left</div>
+		
+		<div class="center4">
+			三栏布局
+		</div>
+		<div class="right4">right</div>
+	</div>
+	<div class="container5">
+		<div class="left5">left</div>
+		
+		<div class="center5">
+			三栏布局
+		</div>
+		<div class="right5">right</div>
+	</div>
+</body>
+</html>

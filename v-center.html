@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="name" content="content">
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<title>v-center</title>
+	<style type="text/css" media="screen">
+	/* div绝对定位水平垂直居中【margin:auto实现绝对定位元素的居中】
+	
+	兼容性：,IE7及之前版本不支持 */
+		.v-center{
+			width:  100px;
+			height: 100px;
+			background: linear-gradient(rgba(255,255,0,0),rgba(255,255,0,1));
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			margin: auto;
+			border: 1px solid #ddd;
+		}
+	/* div绝对定位水平垂直居中【margin 负间距】 */
+		.v-center2{
+			width: 90px;
+			height: 90px;
+			background: red;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-left: -45px;
+			margin-top: -45px;
+		}
+	/* div绝对定位水平垂直居中【Transforms 变形】
+	
+	兼容性：IE8不支持； */
+		.v-center3{
+			width: 80px;
+			height: 80px;
+			background: green;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%,-50%);
+		}
+	/* css不定宽高水平垂直居中 */
+		.v-parent{
+			width: 300px;
+			height: 300px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: pink;
+		}
+		.v-parent .v-center4{
+			background: purple;
+			width: 70px;
+			height: 70px;
+		}
+		/* 方案4：table-cell布局  
+		因为table-cell相当与表格的td，td为行内元素，无法设置宽和高，所以嵌套一层，嵌套一层必须设置display: inline-block;td的背景覆盖了橘黄色，不推荐使用 */
+		.v-box{
+			background-color: #FF8C00;
+		    width: 300px;
+		    height: 300px;
+		    display: table;
+		}
+		.v-box .v-content{
+			background: #ddd;
+			display: table-cell;
+			vertical-align: middle;
+			text-align: center;
+		}
+		.v-box .v-content .v-center5{
+			background: #000;
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+		}
+		/* 对子盒子实现绝对定位，利用calc计算位置 */
+		.v-parent2{
+			width: 500px;
+			height: 500px;
+			position: relative;
+		}
+		.v-center6{
+			width: 40px;
+			height: 40px;
+			background: #000;
+			position: absolute;
+
+			left: calc((500px - 20px)/2);
+			left: -webkit-calc((500px - 20px)/2);
+			top: calc((500px - 20px)/2);
+			top: -webkit-calc((500px - 20px)/2);
+		}
+	</style>
+</head>
+<body>
+<!-- 水平垂直居中 -->
+	<div class="v-center"></div>
+	<div class="v-center2"></div>
+	<div class="v-center3"></div>
+	<div class="v-parent">
+		<div class="v-center4"></div>
+	</div>
+	<div class="v-box">
+		<div class="v-content">
+			<div class="v-center5"></div>
+		</div>
+	</div>
+	<div class="v-parent2">
+		<div class="v-center6"></div>
+	</div>
+	
+</body>
+</html>

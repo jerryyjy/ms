@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div class="div1">123</div>
+	<ul>
+		<li>1</li>
+		<li>1</li>
+		<li>1</li>
+		<li>1</li>
+	</ul>
+	<div id="div1">
+		<p>this is p1</p>
+		<p>this is p2</p>
+	</div>
+	<div id="div2">
+		<p>this is p3</p>
+		<p id="p4">this is p4</p>
+	</div>
+	<button>btn</button>
+	<div id="div3">
+		<p id="p1">激活</p>
+		<p id="p2">取消</p>
+	</div>
+	<div id="div4">
+		<p id="p3">取消</p>
+		<p id="p5">取消</p>
+	</div>
+	<div id="div5">
+		<a href="#" >a1</a>
+		<a href="#" >a2</a>
+
+		<a href="#" >a3</a>
+		<!-- 会随时新增更多a标签 -->
+	</div>
+</body>
+<script>
+	function fn(){
+		//函数声明
+	}
+	var fn1 =  function(name){
+		//函数表达式
+		alert(name);
+		console.log(this);
+	}.bind({s:100});
+	fn1('yjy');
+	fn1.call({x:100},'lyq');
+	fn1.apply({y:200},['yjq']);
+	//闭包
+	//1.函数作为返回值
+	//2.函数作为参数来传递
+	function F1(){
+		var a = 100;
+		return function(){
+			console.log(a);
+		}
+	}
+	var f1 = F1();
+	var a = 200;
+	f1();//100
+	var i,a;
+	for(i = 0; i < 10; i++){
+		(function(i){//自执行函数不用调用能够自己执行
+			a = document.createElement('a');
+			a.innerHTML = i + '<br>';
+			a.addEventListener('click',function(e){
+				//e.preventDefult();
+				alert(i);
+			})
+			document.body.appendChild(a);
+		})(i)	
+	}
+	function isFirstLoad(id){
+		var list = [];
+		return function(id){
+			if(list.indexOf(id) >=0){
+				return false;
+			}else{
+				list.push(id);
+				return true;
+			}
+		}
+	}
+	var firstLoad = isFirstLoad();
+	firstLoad(10);
+
+	console.log(100);
+	setTimeout(function(){
+		console.log(200);
+	},1000);
+	console.log(300);
+	var btn = document.createElement('button');
+	btn.id = 'btn1';
+	btn.innerHTML = 'btn';
+	document.body.append(btn);
+	console.log('start');
+	document.getElementById('btn1').addEventListener('clck',function(){
+		alert('clicked');
+	});
+	
+	console.log('end');
+	setTimeout(function(){
+		console.log(200);
+	});
+	console.log('s');
+	//alert是同步 settimeout异步
+	var arr = [3,4,5];
+	arr.forEach(function(item,index){
+		console.log(index,item);
+	})
+	var result = arr.every(function(item,index){
+		if(item < 4){//必须每一个都小于4
+			return true;
+		}
+	})
+	console.log(result);
+	var result2 = arr.some(function(item,index){
+		if(item < 4){//只要有一个都小于4
+			return true;
+		}
+	});
+	console.log(result2);
+	var arr = [4,3,6,2,8];
+	var arr3 = arr.sort(function(a,b){
+		return a-b;//从小到大排序
+		//从大到小排序 
+		//return b-a;
+	});
+	console.log(arr3);
+	var arr2 = arr.map(function(item,index){
+		return '<br>'+item+'</br>';
+	});
+	console.log(arr2);
+	var arr4 = arr.filter(function(item,index){
+		//通过某一个条件过滤数组
+		if(item >=2){
+			return true;
+		}
+	});
+	console.log(arr4);
+	//对象
+	var obj = {
+		x: 100,
+		y: 200,
+		z: 300
+	};
+	var key;
+	for(key in obj){
+		if(obj.hasOwnProperty(key)){
+			console.log(key,obj[key]);
+		}
+	}
+	console.log(Date.now());
+	var dt = new Date();
+	console.log(dt.getTime());
+	console.log(dt.getFullYear());
+	console.log(dt.getMonth());
+	console.log(dt.getDate());
+	console.log(dt.getHours());
+	console.log(dt.getMinutes());
+	console.log(dt.getSeconds());
+	function getNowDate(){
+		var d = new Date();
+		var y = d.getFullYear();
+		var m = d.getMonth()+1;
+		m < 10?m='0'+m:m;
+		var r = d.getDate();
+		d < 10?m='0'+d:d;
+		alert(y+'-'+m+'-'+r) ;
+	}
+	getNowDate();
+	//获取随机数，要求长度一致
+	var random = Math.random();
+	random = random +'0000000000';
+	random = random.slice(0,10);
+	console.log(random);
+	var obj = {x:100,y:200};
+	forEach(obj,function(key,value){
+		console.log(key,value);
+	})
+	//可以循环遍历数组和对象
+	function forEach(obj,fn){
+		var key;
+		if(obj instanceof Array){
+			obj.forEach(function(item,index){
+				fn(index,item)
+			})
+		}else{
+			for(key in obj){
+				if(obj.hasOwnProperty(key)){
+					fn(key,obj[key]);
+				}
+				
+			}
+		}
+	}
+	var div1 = document.getElementsByClassName('div1');
+	var pList = document.querySelectorAll('li');
+	pList[0].style.color = 'red';
+	pList[0].setAttribute('style','background:purple');
+
+	var div1 = document.getElementById('div1');
+	var divList = document.getElementsByTagName('div');
+	var pList = document.querySelectorAll('p');
+	var p1 = document.createElement('p');
+	p1.innerHTML = 'ccreate';
+	div1.appendChild(p1);
+	var parent = div1.parentElement;
+	var p4 = document.getElementById('p4');
+	div1.appendChild(p4);
+	console.log(p4.parentElement);
+	console.log(div1.childNodes);
+	div1.removeChild(p4);
+	//BOM
+	//判断浏览器类型
+	var ua = navigator.userAgent;
+	var isChrome = ua.indexOf('Chrome');
+	console.log(screen.width);
+	//location
+	location.href;
+	location.host;
+	location.search;
+	location.hash;
+	location.pathname;
+	location.protocol;
+	//绑定
+	var btn = document.getElementsByTagName('button');
+	function bindEvent(elem,type,fn){
+		elem.addEventListener(type,fn);
+	}
+	bindEvent(btn,'click',function(){
+		alert('clicked');
+	})
+	//事件冒泡
+	var p1 = document.getElementById('p1');
+	var body = document.body;
+	bindEvent(p1,'click',function(e){
+		e.stopPropatation();//阻止向上冒泡避免出现先弹出激活后弹出取消
+		alert('激活');
+	})
+	bindEvent(body,'click',function(){
+		alert('取消');
+	})
+	var div5 = document.getElementById('div5');
+	div5.addEventListener('click',function(e){
+		var target = e.target;
+		if(target.nodeName == 'A' ){
+			alert(target.innerHTML);
+		}
+	})
+</script>
+</html>
